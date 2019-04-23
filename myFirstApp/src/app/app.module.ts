@@ -5,12 +5,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { Page1Component } from './page1/page1.component';
+import { ParallaxDirective } from './parallax.directive';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
-    Page1Component
+    Page1Component,
+    ParallaxDirective
   ],
   imports: [
     BrowserModule,

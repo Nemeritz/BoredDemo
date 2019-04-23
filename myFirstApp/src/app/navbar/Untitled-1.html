@@ -1,0 +1,86 @@
+<!--Template Starts: CSS--><style type="text/css">    #document {        width: 100%;        font-size: 9pt;        font-family: Arial, Helvetica, sans-serif;    }        #document h1 {}        #edit-section-header th,    td {        padding-left: 8px;    }        #footer,    #footer table td {        /*font-size: 8pt; margin-bottom: 0px;*/    }        .lineitems {        width: 100%;    }        .lineitems th {        background-color: #F3F3F3;        border-top: 1px solid #dddddd;        border-bottom: 1px solid #cccccc;        text-align: left; }        .line-note {        font-size: 8pt;        color: #808080;    }        .standard-grid {        border-collapse: collapse;        margin: 0px 0px 10px 0px;    }        .standard-grid td,    .standard-grid th {        border: 1px solid #999;        padding: 5px 10px;    }        .standard-grid th {        background: #f4f4f4;    }        .hide {        display: none;    }        .sizegrid {        border-collapse: collapse;    }        .sizegrid td {        border: 1px solid #999;        font-size: 11px;        width: 20px;        padding: 3px;    }        .sizegrid tr td:first-child {        background: #f4f4f4;    }         .lineitem-child td {        font-style: italic;    }        .parent td {        display: none;    }</style><!--Template Ends: CSS--><div id="document"><div class="edit-section" id="edit-section-header"><!--Template Starts: Header--><div id="header" style="height: 82px;"><table border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><td style="width: 34.3321%;"><img src="/webfiles/jdlightingAU/layouts/images/logo.jpg?T=636824588306563207" border="0" style="height: 60px;" alt="" class="fr-fic fr-dii"></td><td style="width: 45.0686%;"><input type="radio" id="code39" name="btype" value="code39" checked="" style="display: none;"><input type="hidden" id="bgColor" value="#FFFFFF" size="7"><input type="hidden" id="color" value="#000000" size="7"><input type="hidden" id="barWidth" value="1" size="3"><input type="hidden" id="barHeight" value="20" size="3"><input type="radio" id="css" name="renderer" value="css" checked="checked" style="display: none;"><div class="barcodeTarget" id="%%ATT:TransactionRef%%barcodeTarget"><input type="radio" id="code39" name="btype" value="code39" checked="" style="display: none;"><input type="hidden" id="bgColor" value="#FFFFFF" size="7"><input type="hidden" id="color" value="#000000" size="7"><input type="hidden" id="barWidth" value="1" size="3"><input type="hidden" id="barHeight" value="20" size="3"><input type="radio" id="css" name="renderer" value="css" checked="checked" style="display: none;"><div class="barcodeTarget" id="%%ATT:TransactionRef%%barcodeTarget"><input type="radio" id="code39" name="btype" value="code39" checked="" style="display: none;"><input type="hidden" id="bgColor" value="#FFFFFF" size="7"><input type="hidden" id="color" value="#000000" size="7"><input type="hidden" id="barWidth" value="1" size="3"><input type="hidden" id="barHeight" value="20" size="3"><input type="radio" id="css" name="renderer" value="css" checked="checked" style="display: none;"><div class="barcodeTarget" id="%%ATT:TransactionRef%%barcodeTarget" align="center">
+                        <script type="text/javascript" src="/scripts/apps/barcodes/jquery-1.3.2.min.js"></script>
+                        <script type="text/javascript" src="/scripts/apps/barcodes/jquery-barcode-2.0.2.min.js"></script>
+                        <script type="text/javascript">
+ 
+                            function generateBarcode(barcodeValue, barcodeTarget) {
+ 
+                                //      var value = document.getElementById( barcodeValue ).value;
+                                //        var value = $("#" + barcodeValue).val();
+                                var value = barcodeValue
+                                var btype = $("input[name=btype]:checked").val();
+                                var renderer = $("input[name=renderer]:checked").val();
+ 
+                                var quietZone = false;
+                                if ($("#quietzone").is(':checked') || $("#quietzone").attr('checked')) {
+                                    quietZone = true;
+                                }
+ 
+                                var settings = {
+                                    output: renderer,
+                                    bgColor: $("#bgColor").val(),
+                                    color: $("#color").val(),
+                                    barWidth: $("#barWidth").val(),
+                                    barHeight: $("#barHeight").val(),
+                                    moduleSize: $("#moduleSize").val(),
+                                    posX: $("#posX").val(),
+                                    posY: $("#posY").val(),
+                                    addQuietZone: $("#quietZoneSize").val()
+                                };
+                                if ($("#rectangular").is(':checked') || $("#rectangular").attr('checked')) {
+                                    value = { code: value, rect: true };
+                                }
+ 
+                                //      var objBarcodeTarget = document.getElementById( barcodeTarget );
+ 
+                                $("#" + barcodeTarget).html("").show().barcode(value, btype, settings);
+                                //         objBarcodeTarget.html("").show().barcode(value, btype, settings);
+                            }
+ 
+                            function showConfig1D() {
+                                $('.config .barcode1D').show();
+                                $('.config .barcode2D').hide();
+                            }
+ 
+                            function showConfig2D() {
+                                $('.config .barcode1D').hide();
+                                $('.config .barcode2D').show();
+                            }
+ 
+                            function clearCanvas() {
+                                var canvas = $('#canvasTarget').get(0);
+                                var ctx = canvas.getContext('2d');
+                                ctx.lineWidth = 1;
+                                ctx.lineCap = 'butt';
+                                ctx.fillStyle = '#FFFFFF';
+                                ctx.strokeStyle = '#000000';
+                                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                                ctx.strokeRect(0, 0, canvas.width, canvas.height);
+ 
+                            }
+ 
+                            $(function () {
+                                $('input[name=btype]').click(function () {
+                                    if ($(this).attr('id') == 'datamatrix') showConfig2D(); else showConfig1D();
+                                });
+                                $('input[name=renderer]').click(function () {
+                                    if ($(this).attr('id') == 'canvas') $('#miscCanvas').show(); else $('#miscCanvas').hide();
+                                });
+                                generateBarcode();
+                            });
+ 
+                        </script>
+ 
+                        <input type="radio" id="code39" name="btype" value="code39" checked style="display: none;">
+                        <input type="hidden" id="bgColor" value="#FFFFFF" size="7">
+                        <input type="hidden" id="color" value="#000000" size="7">
+                        <input type="hidden" id="barWidth" value="1" size="3">
+                        <input type="hidden" id="barHeight" value="20" size="3">
+                        <input type="radio" id="css" name="renderer" value="css" checked="checked" style="display: none;">
+ 
+                        <div id="%%ATT:TransactionRef%%barcodeTarget" class="barcodeTarget"></div>
+                        <script type="text/javascript">
+                            generateBarcode("%%ATT:TransactionRef%%", "%%ATT:TransactionRef%%barcodeTarget");
+                        </script>
+                    </div></div></div></td><td style="text-align: right; width: 20.5993%;"><h1 id="document-heading" style="font-size: 14pt; color: #808080;">Packing Slip</h1></td></tr></tbody></table></div><!--Template Ends: Header--><div id="edit-section-header-details"><table border="0" cellpadding="0" cellspacing="0" style="width: 100%;"><thead><tr><th style="border-left: 1px solid rgb(221, 221, 221); text-align: left; width: 16%;">ETD</th><th style="border-left: 1px solid rgb(221, 221, 221); text-align: left; width: 16%;">Ref</th><th style="border-left: 1px solid rgb(221, 221, 221); text-align: left; width: 16%;">Customer PO No</th><th style="border-left: 1px solid rgb(221, 221, 221); text-align: left; width: 16%;">Created By</th><th style="border-left: 1px solid rgb(221, 221, 221); text-align: left; width: 16%;">Invoice Date</th><th style="border-left: 1px solid rgb(221, 221, 221); text-align: left; width: 16%;">Invoice No</th></tr></thead><tbody><tr><td style="border-left: 1px solid rgb(221, 221, 221);">%%ATT:DueDate%%</td><td style="border-left: 1px solid rgb(221, 221, 221);">%%ATT:TransactionRef%%</td><td style="border-left: 1px solid rgb(221, 221, 221);">%%ATT:CustomerRef%%</td><td style="border-left: 1px solid rgb(221, 221, 221);">%%ATT:CreatedBy%%</td><td style="border-left: 1px solid rgb(221, 221, 221);">%%ATT:InvoiceDate%%</td><td style="border-left: 1px solid rgb(221, 221, 221);">%%ATT:InvoiceNo%%</td></tr></tbody></table></div></div><div style="margin-bottom: 10px; border-bottom: solid 1px #cccccc; width: 100%;">&nbsp;</div><!--<a href="/rsfa.asp?idWebPage=119899&idjdlightingAU_Orders=%%ATT:OrderId%%&SID=%%ATT:SessionId%%&idWebSite=3274&UN=li&Admin=True"><font size=3>Pay Invoice Online</font></a>--><div class="edit-section" id="edit-section-address"><table border="0" cellpadding="0" cellspacing="5" width="100%"><tbody><tr valign="top"><td align="left" valign="top" width="50%"><div class="address"><div class="primary-colour"><strong>Customer:</strong></div><div><strong>%%ATT:BillingCompany%%</strong> %%ATT:BillingRecipient%% %%ATT:BillingAddressDetails%%<p id="contact-details">Phone: %%ATT:Phone%%<br>Mobile: %%ATT:Mobile%%<br>%%ATT:Email%%</p></div></div></td><td align="left" valign="top" width="50%"><div class="address"><div class="primary-colour"><strong>Ship To:</strong></div><div><strong>%%ATT:DeliveryCompany%%</strong> %%ATT:DeliveryRecipient%% %%ATT:DeliveryAddressDetails%%</div><p><strong><em>Method:&nbsp;</em></strong><em>%%ATT:FreightDescription%%</em></p><div><p id="delivery-instructions"><em>%%ATT:DeliveryInstructions%%</em></p></div></div></td></tr></tbody></table></div><br><div class="edit-section" id="edit-section-lineitems"><span>&nbsp;<table border="0" cellpadding="2" cellspacing="0" class="lineitems" style="width: 100%; break-inside: avoid; table-layout: fixed;"><thead><tr><th style="background-color: rgb(243, 243, 243); border-top: 1px solid rgb(221, 221, 221); text-align: left; width: 20.0749%;">Code</th><th style="background-color: rgb(243, 243, 243); border-top: 1px solid rgb(221, 221, 221); text-align: left; width: 19.9251%;">Item</th><th style="background-color: rgb(243, 243, 243); border-top: 1px solid rgb(221, 221, 221); text-align: left; width: 19.9251%;">Options</th><th style="background-color: rgb(243, 243, 243); border-top: 1px solid rgb(221, 221, 221); text-align: right; width: 19.9251%;">Qty</th><th style="width: 19.9251%; text-align: right;">Collection Method</th></tr></thead></table>&nbsp;<!--Loop Starts: Items--><table border="0" cellpadding="2" cellspacing="0" class="lineitems" style="width: 100%; break-inside: avoid; table-layout: fixed;"><tbody><tr %%Loop:parenthide%%>
+<td style="text-align: left; overflow-wrap: break-word; width: 20.0749%;">%%Loop:Code%%</td><td style="text-align: left; overflow-wrap: break-word; width: 20.0749%;">%%Loop:Name%%</td><td style="text-align: left; overflow-wrap: break-word; width: 19.9251%;">%%Loop:Variations%%</td><td style="text-align: right; overflow-wrap: break-word; width: 19.9251%;">%%Loop:Qty2%%/%%Loop:Qty3%%</td><td style="text-align: right; overflow-wrap: break-word; width: 19.9251%;">%%Loop:collection%%</td></tr><tr id="size-grid-row"  style="display:none;"><td colspan="2" style="width: 36.2247%;"><br></td><td colspan="2" style="width: 39.8502%;">%%SizeGrid%%</td></tr></tbody></table>&nbsp;<!--Loop Ends: Items-->&nbsp;</span></div><div style="margin: 20px 0; border-bottom: solid 1px gray; width: 100%;"><br></div><div><h2>Dispatch Checklist</h2><table border="0" cellpadding="5" cellspacing="0" width="100%"><tbody><tr><td valign="top" width="15%"><input type="checkbox">&nbsp;Approved</td><td valign="top" width="25%"><input type="checkbox">&nbsp;Available</td><td valign="top" width="25%"><input type="checkbox">&nbsp;Back Order</td><td valign="top" width="25%"><input type="checkbox">&nbsp;Next Day Delivery</td></tr><tr><td valign="top">Packed by:</td><td colspan="2" valign="top">Name: ....................................................</td><td valign="top">Date: ..............................</td></tr><tr><td valign="top">Delivery:</td><td valign="top">Courier ............................</td><td valign="top">Tracking No: ........................</td><td valign="top">Date: ..............................</td></tr><tr><td valign="top">Notes:</td><td colspan="3" valign="top">&nbsp;</td></tr></tbody></table></div><div style="margin: 20px 0 13px 0; border-bottom: solid 1px #cccccc; width: 100%;"><br></div><!--Template Starts: Footer--> <!-- Cin7 Setup: Monday, 28 September 2015 6:45 p.m. --><div id="footer" style="height: 80px; width: 700px;"><table style="width: 100%;"><tbody><tr><td style="width: 99%;"><table border="0" width="100%"><tbody><tr><td style="vertical-align: top; width: 33%;"><strong>JD Lighting &amp; Fans</strong><br>ABN: 58 134 484 763</td><td style="vertical-align: top; width: 33%;"><strong>Main Address</strong><br>Shop B-04/18 Commerce Drive &nbsp;<br>Browns Plains<br>Brisbane Queensland 4118<br>Australia</td><td style="vertical-align: top; width: 33%;"><!--Template Starts: Contact--><table border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><td class="primary-colour" width="30">P</td><td>07&nbsp;3809&nbsp;2011</td></tr><tr><td class="primary-colour" width="30">F</td><td>07&nbsp;3809&nbsp;2840</td></tr><tr><td class="primary-colour">E</td><td>online@jdlighting.com.au</td></tr><tr><td class="primary-colour">W</td><td><a href="http://www.jdlighting.com.au">www.jdlighting.com.au</a> <a href=""></a></td></tr></tbody></table><!--Template Ends: Contact--></td></tr></tbody></table></td></tr></tbody></table></div><!--Template Ends: Footer--></div>
