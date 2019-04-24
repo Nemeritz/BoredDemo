@@ -6,13 +6,15 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { Page1Component } from './page1/page1.component';
 import { ParallaxDirective } from './parallax.directive';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     Page1Component,
-    ParallaxDirective
+    ParallaxDirective,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
