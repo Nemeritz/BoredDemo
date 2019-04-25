@@ -9,3 +9,9 @@
 .btn-primary {
     margin-top: 20px;
 }
+
+.output-div {
+    height: 300px;
+    resize: both;
+    overflow: auto;
+}
